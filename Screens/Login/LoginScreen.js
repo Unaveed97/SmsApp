@@ -35,7 +35,6 @@ export default class LoginScreen extends Component {
       this.setState({
         isLoading: true,
       })
-      await AsyncStorage.setItem('UserPhone', this.state.phoneNumber)
       firebase
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)

@@ -5,7 +5,6 @@ import {
     TextInput,
     TouchableOpacity,
     Alert,
-    AsyncStorage,
     Image,
     View,
     ActivityIndicator
@@ -14,6 +13,7 @@ import ImagePicker from 'react-native-image-picker'
 import firebase from 'firebase'
 import styles from '../Constants/Styles'
 import User from '../Model/User'
+import AsyncStorage from '@react-native-community/async-storage'
 
 console.disableYellowBox = true;
 
@@ -49,7 +49,7 @@ export default class ProfileScreen extends Component {
     changeImage = () => {
         const options = {
             quality: 0.7, allowsEditing: true, mediaType: 'photo', noData: true
-            ,storageOptions: {
+            , storageOptions: {
                 skipBackup: true, waitUntilSaved: true, path: 'images', cameraRoll: true
             }
         }

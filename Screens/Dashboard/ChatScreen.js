@@ -9,7 +9,7 @@ import {
     Animated,
     Platform,
     Keyboard,
-    Image
+    Image   
 } from 'react-native';
 import firebase from 'firebase'
 
@@ -138,18 +138,18 @@ export default class ChatScreen extends Component {
                         onChangeText={this.handelChange('textmessage')}
                     />
                     <TouchableOpacity onPress={this.sendMessage} style={styles.sendBtn}>
-                        <Image source={require('../../Images/send.png')} style={{ tintColor: 'white', resizeMode: 'contain', height: 20 }} />
+                        <Image source={require('../../Images/send.png')} style={{tintColor:'white',resizeMode:'contain',height:20}}/>
                     </TouchableOpacity>
                 </Animated.View>
                 <FlatList
-                    ref={ref => this.flaList = ref}
-                    onContentSizeChange={() => this.flaList.scrollToEnd({ animated: true })}
-                    onLayout={() => this.flaList.scrollToEnd({ animated: true })}
-                    style={{ paddingTop: 5, paddingHorizontal: 5, height }}
+                ref = {ref => this.flaList = ref}
+                onContentSizeChange={()=>this.flaList.scrollToEnd({animated: true})}
+                onLayout={()=>this.flaList.scrollToEnd({animated: true})}
+                    style={{ paddingTop: 5,paddingHorizontal:5, height }}
                     data={this.state.messageList}
                     renderItem={this.renderRow}
                     keyExtractor={(item, index) => index.toString()}
-                    ListFooterComponent={<Animated.View style={{ height: this.bottomPadding }} />}
+                    ListFooterComponent={<Animated.View style={{height: this.bottomPadding}}/>}
                 />
             </KeyboardAvoidingView>
         )
