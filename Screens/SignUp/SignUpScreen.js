@@ -98,7 +98,7 @@ export default class SignupScreen extends Component {
           secureTextEntry={true}
         />
         <Button
-          color="#3740FE"
+          color="#458B00"
           title="Signup"
           onPress={() => this.registerUser()}
         />
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   loginText: {
-    color: '#3740FE',
+    color: '#458B00',
     marginTop: 25,
     textAlign: 'center'
   },
