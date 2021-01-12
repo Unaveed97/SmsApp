@@ -24,11 +24,8 @@ export default class LoginScreen extends Component {
     this.setState(state);
   }
 
-  /* updateInputVal = key => val => {
-     this.setState({ [key]: val })
-   }*/
-
-  userLogin = async () => {
+  userLogin () {
+    console.log("Login is called")
     if (this.state.email === '' && this.state.password === '') {
       Alert.alert('Enter details to signin!')
     } else {
@@ -40,20 +37,21 @@ export default class LoginScreen extends Component {
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((res) => {
           console.log(res)
-          console.log('User logged-in successfully!')
+          console.log('User logged-in successfully! han pata ha')
           this.setState({
             isLoading: false,
             email: '',
             password: ''
           })
-          this.props.navigation.navigate('PhoneAuth')
+          this.props.navigation.navigate('Phone');
         })
         .catch(error => this.setState({ errorMessage: error.message }))
     }
   };
 
   render() {
-    console.log('User logged-in successfully!' + this.state.email + this.state.password);
+    
+    console.log("Login is called")
     if (this.state.isLoading) {
       return (
         <View style={styles.preloader}>
@@ -65,9 +63,9 @@ export default class LoginScreen extends Component {
     return (
 
       <View style={styles.container}>
-<View style={{alignItems:'center'}}>
-        <Image source={require('../../Images/logo.jpeg')} style={{ height: 100, width: 100,marginTop:20, }}  />
-       </View>
+        <View style={{ alignItems: 'center' }}>
+          <Image source={require('../../Images/logo.jpeg')} style={{ height: 100, width: 100, marginTop: 20, }} />
+        </View>
         <View style={{ justifyContent: 'center', flex: 1 }}>
           <TextInput
             style={styles.inputStyle}

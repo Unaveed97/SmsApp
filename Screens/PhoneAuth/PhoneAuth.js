@@ -7,14 +7,15 @@ import {
     Text,
     TextInput
 } from 'react-native'
-import firebase from 'react-native-firebase'
+import firebase from 'firebase'
 
 export default class PhoneAuth extends Component {
     state = {
         phone: '',
         confirmResult: null,
         verificationCode: '',
-        userId: ''
+        userId: '',
+        SetConfirm: ''
     }
 
     validatePhoneNumber = () => {
@@ -22,13 +23,31 @@ export default class PhoneAuth extends Component {
         return regexp.test(this.state.phone)
     }
 
+    componentDidMount() {
+        console.log("I am in phone Auth screen");
+    }
 
     handleSendCode = () => {
         // Request to send OTP
+        /* const appVerifier = window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+             'size': 'normal',
+             'callback': function (response) {
+             },
+             'expired-callback': function () {
+             }
+         });*/
+
+        //var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+        // const recaptchaVerifier = new FirebaseRecaptchaVerifier(recaptchaToken);
+
         if (this.validatePhoneNumber()) {
+            const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+
             firebase
                 .auth()
-                .signInWithPhoneNumber(this.state.phone)
+                .signInWithPhoneNumber(this.state.phone,appVerifier)
                 .then(confirmResult => {
                     this.setState({ confirmResult })
                 })
@@ -89,6 +108,7 @@ export default class PhoneAuth extends Component {
 
 
     render() {
+
         return (
             <SafeAreaView style={[styles.container, { backgroundColor: '#333' }]}>
                 <View style={styles.page}>

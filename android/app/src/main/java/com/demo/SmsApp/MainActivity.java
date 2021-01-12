@@ -1,4 +1,4 @@
-package com.smsapp;
+package com.demo.SmsApp;
 
 import com.facebook.react.ReactActivity;
 

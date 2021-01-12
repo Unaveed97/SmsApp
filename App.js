@@ -17,7 +17,7 @@ console.disableYellowBox = true;
 const AppStack = createStackNavigator({
   Home: HomeScreen,
   Chat: ChatScreen,
-  PhoneAuth: PhoneAuth,
+  Phone: PhoneAuth,
 })
 
 AppStack.navigationOptions = ({ navigation }) => {
