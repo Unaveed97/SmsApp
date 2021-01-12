@@ -46,7 +46,7 @@ export default class LoginScreen extends Component {
             email: '',
             password: ''
           })
-          this.props.navigation.navigate('App')
+          this.props.navigation.navigate('PhoneAuth')
         })
         .catch(error => this.setState({ errorMessage: error.message }))
     }

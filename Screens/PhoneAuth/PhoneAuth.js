@@ -44,12 +44,130 @@ export default class PhoneAuth extends Component {
 
     }
 
+    handleVerifyCode = () => {
+        // Request for OTP verification
+        const { confirmResult, verificationCode } = this.state
+        if (verificationCode.length == 6) {
+            confirmResult
+                .confirm(verificationCode)
+                .then(user => {
+                    this.setState({ userId: user.uid })
+                    alert(`Verified! ${user.uid}`)
+                })
+                .catch(error => {
+                    alert(error.message)
+                    console.log(error)
+                })
+        } else {
+            alert('Please enter a 6 digit OTP code.')
+        }
+    }
 
-    render() {
+    renderConfirmationCodeView = () => {
         return (
-            <View>
-                <Text> textInComponent </Text>
+            <View style={styles.verificationView}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Verification code'
+                    placeholderTextColor='#eee'
+                    value={this.state.verificationCode}
+                    keyboardType='numeric'
+                    onChangeText={verificationCode => {
+                        this.setState({ verificationCode })
+                    }}
+                    maxLength={6}
+                />
+                <TouchableOpacity
+                    style={[styles.themeButton, { marginTop: 20 }]}
+                    onPress={this.handleVerifyCode}>
+                    <Text style={styles.themeButtonTitle}>Verify Code</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+
+    handleVerifyCode = () => {
+        // Request for OTP verification
+        const { confirmResult, verificationCode } = this.state
+        if (verificationCode.length == 6) {
+            confirmResult
+                .confirm(verificationCode)
+                .then(user => {
+                    this.setState({ userId: user.uid })
+                    alert(`Verified! ${user.uid}`)
+                })
+                .catch(error => {
+                    alert(error.message)
+                    console.log(error)
+                })
+        } else {
+            alert('Please enter a 6 digit OTP code.')
+        }
+    }
+    renderConfirmationCodeView = () => {
+        return (
+            <View style={styles.verificationView}>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder='Verification code'
+                    placeholderTextColor='#eee'
+                    value={this.state.verificationCode}
+                    keyboardType='numeric'
+                    onChangeText={verificationCode => {
+                        this.setState({ verificationCode })
+                    }}
+                    maxLength={6}
+                />
+                <TouchableOpacity
+                    style={[styles.themeButton, { marginTop: 20 }]}
+                    onPress={this.handleVerifyCode}>
+                    <Text style={styles.themeButtonTitle}>Verify Code</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#aaa'
+    },
+    page: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    textInput: {
+        marginTop: 20,
+        width: '90%',
+        height: 40,
+        borderColor: '#555',
+        borderWidth: 2,
+        borderRadius: 5,
+        paddingLeft: 10,
+        color: '#fff',
+        fontSize: 16
+    },
+    themeButton: {
+        width: '90%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#888',
+        borderColor: '#555',
+        borderWidth: 2,
+        borderRadius: 5
+    },
+    themeButtonTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#fff'
+    },
+    verificationView: {
+        width: '100%',
+        alignItems: 'center',
+        marginTop: 50
+    }
+})

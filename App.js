@@ -10,23 +10,25 @@ import AuthLodingScreen from './Screens/Auth/Auth';
 import ChatScreen from './Screens/Dashboard/ChatScreen';
 import SignUpScreen from './Screens/SignUp/SignUpScreen';
 import ProfileScreen from './Screens/Dashboard/ProfileScreen';
+import PhoneAuth from './Screens/PhoneAuth/PhoneAuth';
 
 console.disableYellowBox = true;
 
 const AppStack = createStackNavigator({
   Home: HomeScreen,
   Chat: ChatScreen,
+  PhoneAuth: PhoneAuth,
 })
 
 AppStack.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = navigation.state.index === 0 
-  return { 
+  let tabBarVisible = navigation.state.index === 0
+  return {
     tabBarVisible
   }
 }
 
-const AuthStack = createStackNavigator({ 
-  Login: LoginScreen ,
+const AuthStack = createStackNavigator({
+  Login: LoginScreen,
   SignUp: SignUpScreen,
 })
 
