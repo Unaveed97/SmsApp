@@ -87,44 +87,39 @@ export default class PhoneAuth extends Component {
     }
 
 
-    handleVerifyCode = () => {
-        // Request for OTP verification
-        const { confirmResult, verificationCode } = this.state
-        if (verificationCode.length == 6) {
-            confirmResult
-                .confirm(verificationCode)
-                .then(user => {
-                    this.setState({ userId: user.uid })
-                    alert(`Verified! ${user.uid}`)
-                })
-                .catch(error => {
-                    alert(error.message)
-                    console.log(error)
-                })
-        } else {
-            alert('Please enter a 6 digit OTP code.')
-        }
-    }
-    renderConfirmationCodeView = () => {
+
+    render() {
         return (
-            <View style={styles.verificationView}>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder='Verification code'
-                    placeholderTextColor='#eee'
-                    value={this.state.verificationCode}
-                    keyboardType='numeric'
-                    onChangeText={verificationCode => {
-                        this.setState({ verificationCode })
-                    }}
-                    maxLength={6}
-                />
-                <TouchableOpacity
-                    style={[styles.themeButton, { marginTop: 20 }]}
-                    onPress={this.handleVerifyCode}>
-                    <Text style={styles.themeButtonTitle}>Verify Code</Text>
-                </TouchableOpacity>
-            </View>
+            <SafeAreaView style={[styles.container, { backgroundColor: '#333' }]}>
+                <View style={styles.page}>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Phone Number with country code'
+                        placeholderTextColor='#eee'
+                        keyboardType='phone-pad'
+                        value={this.state.phone}
+                        onChangeText={phone => {
+                            this.setState({ phone })
+                        }}
+                        maxLength={15}
+                        editable={this.state.confirmResult ? false : true}
+                    />
+
+                    <TouchableOpacity
+                        style={[styles.themeButton, { marginTop: 20 }]}
+                        onPress={
+                            this.state.confirmResult
+                                ? this.changePhoneNumber
+                                : this.handleSendCode
+                        }>
+                        <Text style={styles.themeButtonTitle}>
+                            {this.state.confirmResult ? 'Change Phone Number' : 'Send Code'}
+                        </Text>
+                    </TouchableOpacity>
+
+                    {this.state.confirmResult ? this.renderConfirmationCodeView() : null}
+                </View>
+            </SafeAreaView>
         )
     }
 }
